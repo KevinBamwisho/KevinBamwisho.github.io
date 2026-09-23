@@ -1,34 +1,443 @@
-/* A deliberately small starting point.
-   It exists to prove one thing: this file is loading.
-   If you can see spacing and a readable line length, the path in index.html works.
+/* Kevin Bamwisho. Plain CSS, no build step, no external requests. */
 
-   Delete all of it whenever you want. */
-
+/* Pure black and white. The flames are light, so the ground is true black. */
 :root {
-  /* Makes the page follow the reader's light or dark mode setting, for free. */
-  color-scheme: light dark;
+  --bg: #ffffff;
+  --text: #000000;
+  --muted: #525252;
+  --line: #e5e5e5;
+  --line-strong: #a3a3a3;
+  --panel: #fafafa;
+  --dot: #737373; /* 4.4:1 or better on both backgrounds, so no dark override */
+  --glow: rgb(0 0 0 / 0.22);
+  --flame: 0 0 0; /* r g b, script.js adds the alpha */
+
+  --header-h: 72px;
+  --prose: 65ch;
+  --photo: 240px;
+}
+
+.dark {
+  --bg: #000000;
+  --text: #ffffff;
+  --muted: #a3a3a3;
+  --line: #262626;
+  --line-strong: #525252;
+  --panel: #111111;
+  --glow: rgb(255 255 255 / 0.4);
+  --flame: 255 255 255;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* 19px root, so rem and body text agree. Scale is 1.25: 0.8, 1, 1.25, 1.953, 2.441, 3.815. */
+html {
+  font-size: 118.75%;
+  scroll-behavior: smooth;
+  /* Anchor targets clear the sticky header. */
+  scroll-padding-top: calc(var(--header-h) + 24px);
 }
 
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 1rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  /* The flame canvas is wider than the photo. Clip, don't scroll. */
+  overflow-x: clip;
+}
 
-  /* 65ch caps the line at about 65 characters. Long lines are genuinely hard
-     to read, and this single rule does more for legibility than anything else
-     in this file. */
-  max-width: 65ch;
+h1, h2, h3 { line-height: 1.1; text-wrap: balance; }
+h1 { font-size: clamp(2.25rem, 11vw, 3.815rem); margin: 0 0 8px; letter-spacing: -0.035em; }
+h2 { font-size: clamp(1.953rem, 5vw, 2.441rem); margin: 0 0 8px; letter-spacing: -0.025em; }
+h3 { font-size: 1.25rem; margin: 0 0 4px; letter-spacing: -0.01em; }
 
+p { margin: 0 0 16px; max-width: var(--prose); }
+
+a { color: inherit; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Skip link. Visible only once focused. */
+.skip {
+  position: absolute;
+  left: 8px;
+  top: -64px;
+  z-index: 10;
+  padding: 8px 16px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+.skip:focus { top: 8px; }
+
+/* Buttons. An outline means you can click it. */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  transition: border-color 0.15s;
+}
+.btn:hover { border-color: var(--text); }
+
+/* Header */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  min-height: var(--header-h);
+  padding: 8px max(24px, calc((100% - 1100px) / 2 + 24px));
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.wordmark {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header nav { margin-left: auto; }
+
+.site-header ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+}
+
+.site-header nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.site-header nav a:hover { color: var(--text); }
+
+[data-theme-toggle] {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+[data-theme-toggle]:hover { color: var(--text); }
+
+/* Layout */
+
+main {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 4rem 1.5rem;
-  line-height: 1.6;
-  font-size: 1.125rem;
+  padding: 0 24px;
 }
 
-h1 {
-  font-size: 3rem;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
+main > section { padding: 96px 0 32px; }
+
+.intro {
+  color: var(--muted);
+  margin-bottom: 32px;
 }
 
-p {
-  margin-bottom: 1.5rem;
+/* Hero: photo left, name right, bio across the bottom. */
+
+.hero {
+  display: grid;
+  grid-template-columns: var(--photo) 1fr;
+  align-items: center;
+  gap: 48px 64px;
+  padding-top: 112px;
+}
+
+.portrait {
+  position: relative;
+  width: var(--photo);
+  height: var(--photo);
+}
+
+.portrait img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--line);
+  border: 2px solid var(--line-strong);
+  box-shadow: 0 0 56px 16px var(--glow);
+}
+
+/* 1.8x the photo so flames reach past its edge. script.js reads this size. */
+#flames {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--photo) * 1.8);
+  height: calc(var(--photo) * 1.8);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+}
+
+.bio {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 1.25rem;
+}
+.bio p { max-width: 44ch; }
+
+/* Cards. Outlined, no fill: whitespace does the separating. */
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px;
+}
+.card + .card { margin-top: 32px; }
+
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px 24px;
+  margin-bottom: 24px;
+}
+.card-head > div { flex: 1 1 280px; }
+.card-head .links { margin: 0; }
+
+.card .meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 0;
+}
+.card cite { font-style: italic; }
+
+.card > p { color: var(--muted); }
+
+/* Every card image gets the same 16:10 frame, whole image showing, so cards
+   line up whatever shape the file is. */
+.card > img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  padding: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+/* Logos sit on a white tile so they read in both themes. */
+.card .logo {
+  width: auto;
+  height: 56px;
+  padding: 8px 12px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+/* A logo that brings its own background fills the tile. */
+.card .logo.bleed { padding: 0; }
+
+.card .stat { color: var(--text); }
+
+/* Chips are filled, not outlined: they're labels, not buttons. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  color: var(--muted);
+  font-size: 0.8rem;
+  padding: 4px 12px;
+  background: var(--line);
+  border-radius: 999px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+/* The Hardwood Vault. One photo at a time, crossfading. The stage keeps a
+   fixed shape so the page never jumps, but draws no box: each photo sits
+   centred at its own shape with its own rounded edge. */
+
+.carousel { margin-top: 32px; }
+
+.carousel-stage {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 3;
+}
+
+.carousel-stage img {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.7s;
+}
+.carousel-stage img.is-active { opacity: 1; }
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+.carousel-controls[hidden] { display: none; }
+
+.carousel-dots { display: flex; }
+
+/* 32px hit area around a small mark. */
+.carousel-controls button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.carousel-dots button::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--dot);
+  transition: background-color 0.15s;
+}
+.carousel-dots button:hover::before { background: var(--muted); }
+/* The current photo is a wider pill, so it doesn't rely on colour alone. */
+.carousel-dots button[aria-current="true"]::before {
+  width: 20px;
+  background: var(--text);
+}
+
+.carousel-toggle { margin-left: 8px; }
+.carousel-toggle:hover { color: var(--text); }
+.carousel-toggle svg { width: 14px; height: 14px; }
+.carousel-toggle svg[hidden] { display: none; }
+
+/* Footer. The rule runs full width, the content lines up with the header. */
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 64px;
+  padding: 32px max(24px, calc((100% - 1100px) / 2 + 24px));
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+footer p { margin: 0; }
+
+footer ul {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+footer a { text-decoration: none; }
+footer a:hover { color: var(--text); }
+
+/* Small screens */
+
+@media (max-width: 768px) {
+  :root { --photo: 176px; --header-h: 64px; }
+
+  main > section { padding: 64px 0 32px; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 40px;
+    padding-top: 72px;
+  }
+  .hero-text .actions { justify-content: center; }
+  .bio { text-align: left; font-size: 1rem; }
+
+  .card { padding: 24px; }
+  .card + .card { margin-top: 24px; }
+  .card > img { padding: 8px; }
+
+  /* Portrait stage on phones, where most of these photos are portrait. */
+  .carousel-stage { aspect-ratio: 4 / 5; }
+
+  .site-header {
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+  .site-header nav { margin-left: 0; width: 100%; order: 3; }
+  .site-header ul { gap: 24px; }
+  [data-theme-toggle] { margin-left: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
