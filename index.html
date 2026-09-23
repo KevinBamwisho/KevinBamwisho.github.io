@@ -28,7 +28,7 @@
       </ul>
     </nav>
     <button type="button" data-theme-toggle aria-label="Switch theme">
-      <span aria-hidden="true">Theme</span>
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
     </button>
   </header>
 
@@ -36,22 +36,23 @@
 
     <section class="hero" id="top">
       <div class="portrait">
-        <canvas id="bolts" aria-hidden="true"></canvas>
-        <img src="images/kevin-bamwisho.jpg" alt="Kevin Bamwisho" width="400" height="400">
+        <canvas id="flames" aria-hidden="true"></canvas>
+        <img src="images/kevin-bamwisho.jpg" alt="Kevin Bamwisho" width="480" height="480">
       </div>
 
-      <h1>Kevin Bamwisho</h1>
-      <p class="subtitle">First-gen CS + Data Science student · Colorado School of Mines</p>
+      <div class="hero-text">
+        <h1>Kevin Bamwisho</h1>
+        <p class="subtitle">Computer Science + Data Science student · Colorado School of Mines</p>
 
-      <p class="actions">
-        <a href="https://github.com/KevinBamwisho">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/kevin-bamwisho/">LinkedIn ↗</a>
-        <button type="button" disabled>Resume, coming soon</button>
-      </p>
+        <p class="actions">
+          <a class="btn" href="https://github.com/KevinBamwisho">GitHub ↗</a>
+          <a class="btn" href="https://www.linkedin.com/in/kevin-bamwisho/">LinkedIn ↗</a>
+          <a class="btn" href="pdfs/Bamwisho-Resume.pdf">Resume ↗</a>
+        </p>
+      </div>
 
       <div class="bio">
-        <p>I'm a first-generation college student pursuing a B.S. in Computer Science, Data Science concentration, at Colorado School of Mines.</p>
-        <p>I work across optimization systems, agentic AI, and the pipelines that feed them.</p>
+        <p> I'm a first gen college student and Sachs Foundation Scholar studying computer science at Colorado School of Mines. I'm curious, detail-oriented, and always learning. Some of my work has centered on working with data and using it as the foundation to solve real-world problems. I've also built software in Python, C/C++, and Java.</p>
       </div>
     </section>
 
@@ -59,33 +60,41 @@
       <h2>Work</h2>
 
       <article class="card" id="riot-sports">
-        <h3>RIOT Sports</h3>
-        <p class="meta">Full-Stack Engineer Intern · RIOT Sports · May 2025 – Present</p>
+        <div class="card-head">
+          <img class="logo" src="images/logos/riot-sports.png" alt="RIOT Sports logo" width="316" height="160">
+          <div>
+            <h3>RIOT Sports</h3>
+            <p class="meta">Full-Stack Engineer Intern · RIOT Sports · May 2025 – Present</p>
+          </div>
+          <p class="links">
+            <a class="btn" href="https://riotsports.netlify.app">New Site ↗</a>
+            <a class="btn" href="https://s2.smu.edu/~olinick/RIOT_Dev-master/">Legacy site ↗</a>
+          </p>
+        </div>
 
-        <img class="logo" src="images/logos/riot-sports.png" alt="RIOT Sports logo" width="120" height="120">
-        <div class="placeholder" style="--ratio: 16 / 9">Demo video coming soon</div>
+        <img src="images/riot-site.png" alt="RIOT Sports redesign home page, headed Home of the Magic Numbers" width="1200" height="1009">
 
-        <p>RIOT computes exact playoff clinch and elimination numbers for the NBA, WNBA, MLB, and KBO by solving a mixed integer program per team per scenario. I rebuilt the data layer, added event-driven scheduling, and built validation that catches a solver timeout before it can publish as a mathematical proof. It runs nightly against live data, backed by a 1,087-test suite.</p>
+        <p>RIOT computes exact playoff clinch and elimination numbers for the NBA, WNBA, MLB, and KBO. Instead of the napkin-math magic number, it solves a mixed integer program per team per scenario, against the real remaining schedule and each league's tiebreak rules. The answer is a guarantee, not an estimate.
 
-        <p class="stat"><strong>Running nightly, actively managed</strong></p>
-
+</p>
         <ul class="chips">
           <li>Python</li><li>Django</li><li>Bash</li><li>JSON</li><li>AMPL</li><li>Gurobi</li>
         </ul>
-
-        <p class="links">
-          <a href="https://riotsports.netlify.app">Redesign in progress ↗</a>
-          <a href="https://s2.smu.edu/~olinick/RIOT_Dev-master/">Legacy site ↗</a>
-        </p>
       </article>
 
       <article class="card" id="qualcomm">
-        <h3>Qualcomm TBS Analytics Agent</h3>
-        <p class="meta">Technical Consultant · Qualcomm, Test Base Station team · May – June 2026</p>
+        <div class="card-head">
+          <img class="logo bleed" src="images/logos/qualcomm.png" alt="Qualcomm logo" width="400" height="400">
+          <div>
+            <h3>Qualcomm TBS Analytics Agent</h3>
+            <p class="meta">Technical Consultant · Qualcomm, Test Base Station team · May – June 2026</p>
+          </div>
+        </div>
 
-        <p>A natural language to SQL assistant that lets Qualcomm's Test Base Station team query three enterprise databases in plain English, built by a four-person team in five weeks. I owned the agent layer: tool design, the system prompt and context architecture, and testing strategy. Cut schema lookups from about 20,000 tokens to 500 and blocked destructive queries across three independent layers.</p>
+        <p>A natural language to SQL assistant for Qualcomm's Test Base Station team. Engineers ask questions of three enterprise databases in plain English and get back validated SQL, formatted tables, and chart recommendations. Built by a four-person team in five weeks, where I owned the agent layer.
 
-        <p class="stat"><strong>20k → 500 tokens per query, 97% reduction</strong></p>
+</p>
+
 
         <ul class="chips">
           <li>Python</li><li>LangChain</li><li>LangGraph</li><li>RAG</li><li>Qdrant</li><li>FastAPI</li><li>Docker</li>
@@ -93,22 +102,28 @@
       </article>
 
       <article class="card" id="ev-siting">
-        <h3>EV Charger Siting</h3>
-        <p class="meta">Data science and spatial engineering · Operations Research · <cite>Transportation Research Part D</cite>, vol. 156 (2026)</p>
+        <div class="card-head">
+          <img class="logo" src="images/logos/mines.png" alt="Colorado School of Mines logo" width="100" height="100">
+          <div>
+            <h3>EV Charger Siting</h3>
+            <p class="meta">Data science and spatial engineering · Operations Research · <cite>Transportation Research Part D</cite>, vol. 156 (2026)</p>
+          </div>
+          <p class="links">
+            <a class="btn" href="https://www.sciencedirect.com/science/article/pii/S1361920926001264?dgcid=author">Paper ↗</a>
+            <a class="btn" href="https://github.com/KevinBamwisho/EV-Charging-Siting">GitHub repo ↗</a>
+          </p>
+        </div>
 
-        <img src="images/pittsburgh-preview.jpg" alt="Map of Pittsburgh showing candidate EV charger sites" width="1200" height="675">
+        <img src="images/pittsburgh-preview.jpg" alt="Map of Pittsburgh showing candidate EV charger sites" width="1400" height="900" loading="lazy">
 
-        <p>A published tri-objective framework for siting EV chargers across Pittsburgh and Seattle, balancing demand coverage, equitable access, and grid upgrade cost. I'm third author of eight and built the spatial data pipeline: 116,636 building footprints, zoning collapsed from 59 codes to 13, and every figure in the paper. Separately, I cut Folium map exports by 22x and built an H3 hexagon workstream not part of the publication.</p>
+        <p>A published framework for siting Level 2 EV chargers across Pittsburgh and Seattle that balances three goals at once: demand coverage, equitable access, and grid upgrade cost. I'm third author of eight, on the spatial data and the paper's figures.
 
-        <p class="stat"><strong>116,636 building footprints, 7,349 census blocks</strong></p>
+</p>
+
 
         <ul class="chips">
           <li>Python</li><li>Pandas</li><li>GeoPandas</li><li>scikit-learn</li><li>H3</li><li>Folium</li><li>SciPy</li><li>AMPL</li>
         </ul>
-
-        <p class="links">
-          <a href="https://github.com/KevinBamwisho/EV-Charging-Siting">GitHub repo ↗</a>
-        </p>
       </article>
     </section>
 
@@ -116,42 +131,50 @@
       <h2>Projects</h2>
 
       <article class="card" id="algobowl">
-        <h3>AlgoBowl</h3>
-        <p class="meta">Algorithms competition, three-person team · Colorado School of Mines · Spring 2026</p>
+        <div class="card-head">
+          <div>
+            <h3>AlgoBowl</h3>
+            <p class="meta">Algorithms competition, three-person team · Colorado School of Mines · Spring 2026</p>
+          </div>
+          <p class="links">
+            <a class="btn" href="https://github.com/KevinBamwisho/AlgoBowl">GitHub repo ↗</a>
+          </p>
+        </div>
 
-        <img src="images/algobowl-board.png" alt="Enclose Horse grid puzzle board" width="1200" height="675">
+        <img src="images/algobowl-board.png" alt="Enclose Horse grid puzzle board" width="908" height="681" loading="lazy">
 
-        <p>A solver for Enclose Horse, an NP-hard grid puzzle, built with a three-person team for a 47-team competition. I hand-authored a CP-SAT encoding on top of OR-Tools, a max-flow feasibility oracle, and a compute allocator that spent limited overnight compute where marginal rank gain was highest. It matched the provably optimal score on all 18 instances that could be checked and ranked #1 on 38 of 47 inputs.</p>
+        <p>A solver for Enclose Horse, an NP-hard grid puzzle where you place walls to trap a horse while maximizing the score of the region it can still graze. Built by a three-person team for a 47-team competition, it pairs a CP-SAT model on OR-Tools with a max-flow feasibility check and local search.
 
-        <p class="stat"><strong>#1 on 38 of 47 inputs in the per-input standings</strong></p>
+</p>
+
 
         <ul class="chips">
           <li>Python</li><li>OR-Tools</li><li>CP-SAT</li><li>Max-flow / min-cut</li><li>Edmonds–Karp</li><li>BFS</li>
         </ul>
-
-        <p class="links">
-          <a href="https://github.com/KevinBamwisho/AlgoBowl">GitHub repo ↗</a>
-        </p>
       </article>
 
       <article class="card" id="clue">
-        <h3>Clue Game</h3>
-        <p class="meta">Software engineering, two-person team · Colorado School of Mines · Oct – Dec 2025</p>
+        <div class="card-head">
+          <div>
+            <h3>Clue Game</h3>
+            <p class="meta">Software engineering, two-person team · Colorado School of Mines · Oct – Dec 2025</p>
+          </div>
+          <p class="links">
+            <a class="btn" href="https://github.com/KevinBamwisho/Clue">GitHub repo ↗</a>
+            <a class="btn" href="https://clue-kb.netlify.app">Play in browser ↗</a>
+          </p>
+        </div>
 
-        <img src="images/clue.gif" alt="Clue game board re-themed to a college campus" width="1200" height="675">
+        <img src="images/clue.gif" alt="Clue game board re-themed to a college campus" width="800" height="768" loading="lazy">
 
-        <p>A fully playable desktop Clue, re-themed to a college campus, built test-first with a two-person team. I designed a config-driven engine where board layout and cards parse from CSV files, and implemented movement as recursive graph search over adjacency lists. It shipped with a 0.83:1 test-to-production line ratio.</p>
+        <p>A fully playable desktop Clue, re-themed from the mansion to a college campus: nine rooms, six suspects, six weapons, and one human player against five computer opponents. Built test-first by a two-person team, with the board and cards loaded from config files.
 
-        <p class="stat"><strong>0.83:1 test-to-production ratio</strong></p>
+</p>
+
 
         <ul class="chips">
           <li>Java</li><li>JUnit</li><li>Adjacency-list graph search</li><li>Recursive search</li><li>TDD</li>
         </ul>
-
-        <p class="links">
-          <a href="https://github.com/KevinBamwisho/Clue">GitHub repo ↗</a>
-          <a href="https://clue-kb.netlify.app">Play in browser ↗</a>
-        </p>
       </article>
     </section>
 
@@ -175,11 +198,11 @@
   </main>
 
   <footer>
-    <p class="links">
-      <a href="https://github.com/KevinBamwisho">GitHub ↗</a>
-      <a href="https://www.linkedin.com/in/kevin-bamwisho/">LinkedIn ↗</a>
-    </p>
-    <p><small>© <span id="year">2026</span> Kevin Bamwisho</small></p>
+    <p>© 2026 Kevin Bamwisho</p>
+    <ul>
+      <li><a href="https://github.com/KevinBamwisho">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/kevin-bamwisho/">LinkedIn</a></li>
+    </ul>
   </footer>
 
   <script src="script.js"></script>
