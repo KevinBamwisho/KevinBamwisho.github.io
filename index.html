@@ -178,20 +178,28 @@
       </article>
     </section>
 
-    <section id="vault" class="vault">
-      <div class="vault-text">
-        <div class="vault-pin">
-          <h2>The Hardwood Vault</h2>
-          <p>Placeholder copy. Two or three sentences go here, in Kevin's words.</p>
-        </div>
-      </div>
+    <section id="vault">
+      <h2>The Hardwood Vault</h2>
 
-      <div class="vault-photos">
-        <div class="placeholder" style="--ratio: 4 / 5">Photo coming soon</div>
-        <div class="placeholder" style="--ratio: 1 / 1">Photo coming soon</div>
-        <div class="placeholder" style="--ratio: 4 / 5">Photo coming soon</div>
-        <div class="placeholder" style="--ratio: 1 / 1">Photo coming soon</div>
-        <div class="placeholder" style="--ratio: 4 / 5">Photo coming soon</div>
+      <!-- One photo at a time, crossfading every 5 seconds. Without script.js the first photo shows. -->
+      <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Photos">
+        <div class="carousel-stage" aria-live="off">
+          <img class="is-active" src="images/gallery/bball4.webp" alt="Kevin rising for a jump shot in a white Lancers jersey" width="693" height="1040" loading="lazy" decoding="async">
+          <img src="images/gallery/bball2.webp" alt="Kevin bringing the ball up the court in a number 0 jersey" width="696" height="1040" loading="lazy" decoding="async" aria-hidden="true">
+          <img src="images/gallery/bball3.webp" alt="Kevin running the floor in a number 0 jersey" width="1242" height="828" loading="lazy" decoding="async" aria-hidden="true">
+          <img src="images/gallery/bball1.webp" alt="Kevin courtside in an arena, watching players on the floor" width="780" height="1040" loading="lazy" decoding="async" aria-hidden="true">
+          <img src="images/gallery/snowboard.webp" alt="Kevin on a snowboard near a chairlift in falling snow" width="780" height="1040" loading="lazy" decoding="async" aria-hidden="true">
+          <img src="images/gallery/snowboard2.webp" alt="Kevin standing in deep snow holding his snowboard" width="780" height="1040" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+
+        <!-- script.js adds one dot per photo and unhides this row. -->
+        <div class="carousel-controls" hidden>
+          <div class="carousel-dots"></div>
+          <button type="button" class="carousel-toggle" aria-label="Pause slideshow">
+            <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="4.5" height="16" rx="1"/><rect x="14.5" y="4" width="4.5" height="16" rx="1"/></svg>
+            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5Z"/></svg>
+          </button>
+        </div>
       </div>
     </section>
 

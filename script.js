@@ -76,3 +76,68 @@ if (canvas && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
   }
   requestAnimationFrame(frame);
 }
+
+// Hardwood Vault slideshow. Crossfades every 5 seconds, with dots to jump to a
+// photo and a play/pause button (the button is what keeps auto-rotation
+// acceptable under WCAG 2.2.2). Starts paused under reduced motion. The button
+// is the only thing that pauses it, so it always shows the true state; the clock
+// also holds, unseen, while the photos are scrolled out of view.
+const carousel = document.querySelector('.carousel');
+if (carousel) {
+  const DELAY = 5000;
+  const stage = carousel.querySelector('.carousel-stage');
+  const slides = [...stage.querySelectorAll('img')];
+  const controls = carousel.querySelector('.carousel-controls');
+  const toggle = carousel.querySelector('.carousel-toggle');
+  const [pauseIcon, playIcon] = toggle.querySelectorAll('svg');
+
+  const dots = slides.map((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `Show photo ${i + 1} of ${slides.length}`);
+    dot.addEventListener('click', () => show(i));
+    return dot;
+  });
+  carousel.querySelector('.carousel-dots').append(...dots);
+  controls.hidden = false;
+
+  let current = 0;
+  let playing = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let inView = false;
+  let timer;
+
+  function schedule() {
+    clearTimeout(timer);
+    if (playing && inView) timer = setTimeout(() => show(current + 1), DELAY);
+  }
+
+  function show(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === current);
+      slide.setAttribute('aria-hidden', String(i !== current));
+    });
+    dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
+    schedule();
+  }
+
+  function setPlaying(on) {
+    playing = on;
+    toggle.setAttribute('aria-label', on ? 'Pause slideshow' : 'Play slideshow');
+    // SVG has no .hidden property, so set the attribute itself.
+    pauseIcon.toggleAttribute('hidden', !on);
+    playIcon.toggleAttribute('hidden', on);
+    // Announce photo changes only when the visitor is driving.
+    stage.setAttribute('aria-live', on ? 'off' : 'polite');
+    schedule();
+  }
+
+  toggle.addEventListener('click', () => setPlaying(!playing));
+  new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+    schedule();
+  }).observe(stage);
+
+  show(0);
+  setPlaying(playing);
+}

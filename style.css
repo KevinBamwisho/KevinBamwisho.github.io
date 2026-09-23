@@ -8,6 +8,7 @@
   --line: #e5e5e5;
   --line-strong: #a3a3a3;
   --panel: #fafafa;
+  --dot: #737373; /* 4.4:1 or better on both backgrounds, so no dark override */
   --glow: rgb(0 0 0 / 0.22);
   --flame: 0 0 0; /* r g b, script.js adds the alpha */
 
@@ -301,6 +302,78 @@ main > section { padding: 96px 0 32px; }
   font-size: 0.8rem;
 }
 
+/* The Hardwood Vault. One photo at a time, crossfading. The stage keeps a
+   fixed shape so the page never jumps, but draws no box: each photo sits
+   centred at its own shape with its own rounded edge. */
+
+.carousel { margin-top: 32px; }
+
+.carousel-stage {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 3;
+}
+
+.carousel-stage img {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.7s;
+}
+.carousel-stage img.is-active { opacity: 1; }
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+.carousel-controls[hidden] { display: none; }
+
+.carousel-dots { display: flex; }
+
+/* 32px hit area around a small mark. */
+.carousel-controls button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.carousel-dots button::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--dot);
+  transition: background-color 0.15s;
+}
+.carousel-dots button:hover::before { background: var(--muted); }
+/* The current photo is a wider pill, so it doesn't rely on colour alone. */
+.carousel-dots button[aria-current="true"]::before {
+  width: 20px;
+  background: var(--text);
+}
+
+.carousel-toggle { margin-left: 8px; }
+.carousel-toggle:hover { color: var(--text); }
+.carousel-toggle svg { width: 14px; height: 14px; }
+.carousel-toggle svg[hidden] { display: none; }
+
 /* Footer. The rule runs full width, the content lines up with the header. */
 
 footer {
@@ -347,6 +420,9 @@ footer a:hover { color: var(--text); }
   .card { padding: 24px; }
   .card + .card { margin-top: 24px; }
   .card > img { padding: 8px; }
+
+  /* Portrait stage on phones, where most of these photos are portrait. */
+  .carousel-stage { aspect-ratio: 4 / 5; }
 
   .site-header {
     flex-wrap: wrap;
