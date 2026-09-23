@@ -35,7 +35,7 @@ What did it do? How did you notice? What did you do instead?
 
 Claude originally wrote everything on the site. From the about page to the project paragraphs. I rewrote it all myself. I noticed it after reading the first draft. Another thing I noticed it added were these bolded white stats at the bottom of each card. It was pulling things from my resume and adding them at the bottom of cards where they don't belong and that's not what I wanted. I didn't want the page to be another resume.
 
-Another time was the gallery section of course. Its initial design was bad so I came up with my own (decision log 2).
+Another time was the gallery section of course. Its initial design was bad so I came up with my own (decision log 1).
 
 ---
 
