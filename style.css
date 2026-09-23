@@ -1,34 +1,311 @@
-/* A deliberately small starting point.
-   It exists to prove one thing: this file is loading.
-   If you can see spacing and a readable line length, the path in index.html works.
-
-   Delete all of it whenever you want. */
+/* Kevin Bamwisho. Plain CSS, no build step, no external requests. */
 
 :root {
-  /* Makes the page follow the reader's light or dark mode setting, for free. */
-  color-scheme: light dark;
+  --bg: #fafafa;
+  --text: #111111;
+  --muted: #525252;
+  --line: #e5e5e5;
+  --bolt: #0a0a0a;
+
+  --header-h: 64px;
+  --prose: 65ch;
+}
+
+.dark {
+  --bg: #0a0a0a;
+  --text: #ededed;
+  --muted: #a3a3a3;
+  --line: #262626;
+  --bolt: #ffffff;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* Anchor targets clear the sticky header. */
+  scroll-padding-top: calc(var(--header-h) + 24px);
 }
 
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 19px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
 
-  /* 65ch caps the line at about 65 characters. Long lines are genuinely hard
-     to read, and this single rule does more for legibility than anything else
-     in this file. */
-  max-width: 65ch;
+h1, h2, h3 { line-height: 1.15; text-wrap: balance; }
+h1 { font-size: clamp(2.5rem, 8vw, 3.5rem); margin: 0 0 8px; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.75rem, 5vw, 2.25rem); margin: 0 0 32px; letter-spacing: -0.01em; }
+h3 { font-size: 1.5rem; margin: 0 0 4px; }
 
+p { margin: 0 0 16px; max-width: var(--prose); }
+
+a { color: inherit; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Skip link. Visible only once focused. */
+.skip {
+  position: absolute;
+  left: 8px;
+  top: -64px;
+  z-index: 10;
+  padding: 8px 16px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+.skip:focus { top: 8px; }
+
+/* Header */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: var(--header-h);
+  padding: 8px 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.wordmark {
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header nav { margin-left: auto; }
+
+.site-header ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9375rem;
+}
+
+[data-theme-toggle] {
+  font: inherit;
+  font-size: 0.9375rem;
+  color: inherit;
+  background: none;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+[data-theme-toggle]:hover { border-color: var(--muted); }
+
+/* Layout */
+
+main {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 4rem 1.5rem;
-  line-height: 1.6;
-  font-size: 1.125rem;
+  padding: 0 24px;
 }
 
-h1 {
-  font-size: 3rem;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
+main > section { padding: 96px 0; }
+main > section + section { border-top: 1px solid var(--line); }
+
+/* Hero */
+
+.hero { text-align: center; }
+.hero p { margin-left: auto; margin-right: auto; }
+
+.portrait {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 32px;
 }
 
-p {
-  margin-bottom: 1.5rem;
+.portrait img {
+  position: relative;
+  z-index: 1;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--line);
+}
+
+/* Sized 1.8x the photo so bolts reach past its edge. */
+#bolts {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 288px;
+  height: 288px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.subtitle { color: var(--muted); font-size: 1.0625rem; margin-bottom: 32px; }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.actions button[disabled] {
+  font: inherit;
+  font-size: 0.9375rem;
+  color: var(--muted);
+  background: none;
+  padding: 8px 16px;
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  cursor: not-allowed;
+}
+
+.bio { text-align: left; max-width: var(--prose); margin: 0 auto; }
+
+/* Cards */
+
+.card + .card { margin-top: 96px; }
+
+.card .meta {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  margin-bottom: 24px;
+}
+.card cite { font-style: italic; }
+
+.card img {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.card .logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 16px;
+}
+
+.stat { font-size: 1.0625rem; }
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-size: 0.9375rem;
+  margin-bottom: 0;
+}
+
+/* Placeholders. Fixed ratio so real assets drop in with no layout shift. */
+
+.placeholder {
+  aspect-ratio: var(--ratio, 16 / 9);
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--muted);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-bottom: 24px;
+}
+
+/* The Hardwood Vault. Text pins, photos scroll past it. */
+
+.vault {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.vault-pin {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+}
+
+.vault h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.vault-photos { display: grid; gap: 24px; }
+.vault-photos .placeholder { margin-bottom: 0; }
+
+/* Footer */
+
+footer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+footer .links { margin-bottom: 16px; }
+
+/* Small screens */
+
+@media (max-width: 768px) {
+  main > section { padding: 64px 0; }
+  .card + .card { margin-top: 64px; }
+
+  .vault {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  /* Nothing to pin against in one column. */
+  .vault-pin { position: static; }
+
+  .site-header {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+  .site-header nav { margin-left: 0; width: 100%; order: 3; }
+  .site-header ul { gap: 16px; }
+  [data-theme-toggle] { margin-left: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
