@@ -1,0 +1,243 @@
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 10575
+Server: GitHub.com
+Content-Type: text/html; charset=utf-8
+Last-Modified: Wed, 23 Sep 2026 08:03:50 GMT
+Access-Control-Allow-Origin: *
+Strict-Transport-Security: max-age=31556952
+ETag: "6ab387e6-294f"
+expires: Wed, 23 Sep 2026 08:18:16 GMT
+Cache-Control: max-age=600
+x-proxy-cache: MISS
+X-GitHub-Request-Id: 9F1C:2DE52F:DC81FB:ED4076:6AB388F0
+x-github-edge-region: iad
+Accept-Ranges: bytes
+Age: 0
+Date: Wed, 23 Sep 2026 08:08:16 GMT
+Via: 1.1 varnish
+X-Served-By: cache-den-kden1300073-DEN
+X-Cache: MISS
+X-Cache-Hits: 0
+X-Timer: S1790150897.686540,VS0,VE67
+Vary: Accept-Encoding
+X-Fastly-Request-ID: 598ec9c68786eb5553a8e10734217bd261333ce9
+
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kevin Bamwisho</title>
+  <meta name="description" content="Kevin Bamwisho. First-gen CS and Data Science student at Colorado School of Mines, working across optimization systems, agentic AI, and the pipelines that feed them.">
+  <script>
+    // Runs before the stylesheet so the page never flashes light.
+    try {
+      if (localStorage.getItem('theme') === 'light')
+        document.documentElement.classList.remove('dark');
+    } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="wordmark" href="#top">Kevin Bamwisho</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#vault">The Hardwood Vault</a></li>
+      </ul>
+    </nav>
+    <button type="button" data-theme-toggle aria-label="Switch theme">
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </header>
+
+  <main id="main">
+
+    <section class="hero" id="top">
+      <div class="portrait">
+        <canvas id="flames" aria-hidden="true"></canvas>
+        <img src="images/kevin-bamwisho.jpg" alt="Kevin Bamwisho" width="480" height="480">
+      </div>
+
+      <div class="hero-text">
+        <h1>Kevin Bamwisho</h1>
+        <p class="subtitle">Computer Science + Data Science student · Colorado School of Mines</p>
+
+        <p class="actions">
+          <a class="btn" href="https://github.com/KevinBamwisho">GitHub ↗</a>
+          <a class="btn" href="https://www.linkedin.com/in/kevin-bamwisho/">LinkedIn ↗</a>
+          <a class="btn" href="pdfs/Bamwisho-Resume.pdf">Resume ↗</a>
+        </p>
+      </div>
+
+      <div class="bio">
+        <p> I'm a first gen college student and Sachs Foundation Scholar studying computer science at Colorado School of Mines. I'm curious, detail-oriented, and always learning. Some of my work has centered on working with data and using it as the foundation to solve real-world problems. I've also built software in Python, C/C++, and Java.</p>
+      </div>
+    </section>
+
+    <section id="work">
+      <h2>Work</h2>
+
+      <article class="card" id="riot-sports">
+        <div class="card-head">
+          <img class="logo" src="images/logos/riot-sports.png" alt="RIOT Sports logo" width="316" height="160">
+          <div>
+            <h3>RIOT Sports</h3>
+            <p class="meta">Full-Stack Engineer Intern · RIOT Sports · May 2025 – Present</p>
+          </div>
+          <p class="links">
+            <a class="btn" href="https://riotsports.netlify.app">New Site ↗</a>
+            <a class="btn" href="https://s2.smu.edu/~olinick/RIOT_Dev-master/">Legacy site ↗</a>
+          </p>
+        </div>
+
+        <img src="images/riot-site.png" alt="RIOT Sports redesign home page, headed Home of the Magic Numbers" width="1200" height="1009">
+
+        <p>RIOT computes exact playoff clinch and elimination numbers for the NBA, WNBA, MLB, and KBO. Instead of the napkin-math magic number, it solves a mixed integer program per team per scenario, against the real remaining schedule and each league's tiebreak rules. The answer is a guarantee, not an estimate.
+
+</p>
+        <ul class="chips">
+          <li>Python</li><li>Django</li><li>Bash</li><li>JSON</li><li>AMPL</li><li>Gurobi</li>
+        </ul>
+      </article>
+
+      <article class="card" id="qualcomm">
+        <div class="card-head">
+          <img class="logo bleed" src="images/logos/qualcomm.png" alt="Qualcomm logo" width="400" height="400">
+          <div>
+            <h3>Qualcomm TBS Analytics Agent</h3>
+            <p class="meta">Technical Consultant · Qualcomm, Test Base Station team · May – June 2026</p>
+          </div>
+        </div>
+
+        <p>A natural language to SQL assistant for Qualcomm's Test Base Station team. Engineers ask questions of three enterprise databases in plain English and get back validated SQL, formatted tables, and chart recommendations. Built by a four-person team in five weeks, where I owned the agent layer.
+
+</p>
+
+
+        <ul class="chips">
+          <li>Python</li><li>LangChain</li><li>LangGraph</li><li>RAG</li><li>Qdrant</li><li>FastAPI</li><li>Docker</li>
+        </ul>
+      </article>
+
+      <article class="card" id="ev-siting">
+        <div class="card-head">
+          <img class="logo" src="images/logos/mines.png" alt="Colorado School of Mines logo" width="100" height="100">
+          <div>
+            <h3>EV Charger Siting</h3>
+            <p class="meta">Data science and spatial engineering · Operations Research · <cite>Transportation Research Part D</cite>, vol. 156 (2026)</p>
+          </div>
+          <p class="links">
+            <a class="btn" href="https://www.sciencedirect.com/science/article/pii/S1361920926001264?dgcid=author">Paper ↗</a>
+            <a class="btn" href="https://github.com/KevinBamwisho/EV-Charging-Siting">GitHub repo ↗</a>
+          </p>
+        </div>
+
+        <img src="images/pittsburgh-preview.jpg" alt="Map of Pittsburgh showing candidate EV charger sites" width="1400" height="900" loading="lazy">
+
+        <p>A published framework for siting Level 2 EV chargers across Pittsburgh and Seattle that balances three goals at once: demand coverage, equitable access, and grid upgrade cost. I'm third author of eight, on the spatial data and the paper's figures.
+
+</p>
+
+
+        <ul class="chips">
+          <li>Python</li><li>Pandas</li><li>GeoPandas</li><li>scikit-learn</li><li>H3</li><li>Folium</li><li>SciPy</li><li>AMPL</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <article class="card" id="algobowl">
+        <div class="card-head">
+          <div>
+            <h3>AlgoBowl</h3>
+            <p class="meta">Algorithms competition, three-person team · Colorado School of Mines · Spring 2026</p>
+          </div>
+          <p class="links">
+            <a class="btn" href="https://github.com/KevinBamwisho/AlgoBowl">GitHub repo ↗</a>
+          </p>
+        </div>
+
+        <img src="images/algobowl-board.png" alt="Enclose Horse grid puzzle board" width="908" height="681" loading="lazy">
+
+        <p>A solver for Enclose Horse, an NP-hard grid puzzle where you place walls to trap a horse while maximizing the score of the region it can still graze. Built by a three-person team for a 47-team competition, it pairs a CP-SAT model on OR-Tools with a max-flow feasibility check and local search.
+
+</p>
+
+
+        <ul class="chips">
+          <li>Python</li><li>OR-Tools</li><li>CP-SAT</li><li>Max-flow / min-cut</li><li>Edmonds–Karp</li><li>BFS</li>
+        </ul>
+      </article>
+
+      <article class="card" id="clue">
+        <div class="card-head">
+          <div>
+            <h3>Clue Game</h3>
+            <p class="meta">Software engineering, two-person team · Colorado School of Mines · Oct – Dec 2025</p>
+          </div>
+          <p class="links">
+            <a class="btn" href="https://github.com/KevinBamwisho/Clue">GitHub repo ↗</a>
+            <a class="btn" href="https://clue-kb.netlify.app">Play in browser ↗</a>
+          </p>
+        </div>
+
+        <img src="images/clue.gif" alt="Clue game board re-themed to a college campus" width="800" height="768" loading="lazy">
+
+        <p>A fully playable desktop Clue, re-themed from the mansion to a college campus: nine rooms, six suspects, six weapons, and one human player against five computer opponents. Built test-first by a two-person team, with the board and cards loaded from config files.
+
+</p>
+
+
+        <ul class="chips">
+          <li>Java</li><li>JUnit</li><li>Adjacency-list graph search</li><li>Recursive search</li><li>TDD</li>
+        </ul>
+      </article>
+    </section>
+
+    <section id="vault">
+      <h2>The Hardwood Vault</h2>
+
+      <!-- One photo at a time, crossfading every 5 seconds. Without script.js the first photo shows. -->
+      <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Photos">
+        <div class="carousel-stage" aria-live="off">
+          <img class="is-active" src="images/gallery/bball4.webp" alt="Kevin rising for a jump shot in a white Lancers jersey" width="693" height="1040" loading="lazy" decoding="async">
+          <img src="images/gallery/bball2.webp" alt="Kevin bringing the ball up the court in a number 0 jersey" width="696" height="1040" loading="lazy" decoding="async" aria-hidden="true">
+          <img src="images/gallery/bball3.webp" alt="Kevin running the floor in a number 0 jersey" width="1242" height="828" loading="lazy" decoding="async" aria-hidden="true">
+          <img src="images/gallery/bball1.webp" alt="Kevin courtside in an arena, watching players on the floor" width="780" height="1040" loading="lazy" decoding="async" aria-hidden="true">
+          <img src="images/gallery/snowboard.webp" alt="Kevin on a snowboard near a chairlift in falling snow" width="780" height="1040" loading="lazy" decoding="async" aria-hidden="true">
+          <img src="images/gallery/snowboard2.webp" alt="Kevin standing in deep snow holding his snowboard" width="780" height="1040" loading="lazy" decoding="async" aria-hidden="true">
+        </div>
+
+        <!-- script.js adds one dot per photo and unhides this row. -->
+        <div class="carousel-controls" hidden>
+          <div class="carousel-dots"></div>
+          <button type="button" class="carousel-toggle" aria-label="Pause slideshow">
+            <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="4.5" height="16" rx="1"/><rect x="14.5" y="4" width="4.5" height="16" rx="1"/></svg>
+            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5Z"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Kevin Bamwisho</p>
+    <ul>
+      <li><a href="https://github.com/KevinBamwisho">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/kevin-bamwisho/">LinkedIn</a></li>
+    </ul>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

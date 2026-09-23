@@ -56,8 +56,6 @@ The check that counts is the live URL. On September 23 around 1 AM, `curl` on ht
 
 Proof is in [`verification/`](verification/).
 
-**TODO before submitting:** merge to `main` and push, then fill `verification/` (screenshot with the URL bar, `curl -i` output in `fetch.txt`, and the three-line README).
-
 ### How I know it works
 
 - ran `start index.html` to check site features and saw if everything I saw was what I expected. It was. Now just uploading it to github pages and writing up the verification folder.
